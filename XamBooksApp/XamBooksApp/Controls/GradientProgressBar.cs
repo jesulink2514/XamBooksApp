@@ -100,7 +100,6 @@ namespace XamBooksApp.Controls
                 control.InvalidateSurface();
         }
 
-
         protected override void OnPaintSurface(SKPaintSurfaceEventArgs e)
         {
             var info = e.Info;
@@ -136,7 +135,6 @@ namespace XamBooksApp.Controls
                 float y = info.Height;
                 var rect = new SKRect(0, 0, x, y);
 
-                // Create linear gradient from upper-left to lower-right
                 paint.Shader = SKShader.CreateLinearGradient(
                     new SKPoint(rect.Left, rect.Top),
                     new SKPoint(rect.Right, rect.Top),
@@ -148,39 +146,24 @@ namespace XamBooksApp.Controls
                     new float[] { 0, 1 },
                     SKShaderTileMode.Clamp);
 
-                // Draw the gradient on the rectangle
                 canvas.DrawRoundRect(progressBar, paint);
             }
 
+            var textPaint = new SKPaint {Color = TextColor.ToSKColor(), TextSize = textSize};
 
+            var textBounds = new SKRect();
 
-            var fonts = SKFontManager.Default.GetFontFamilies();
-
-            // Create an SKPaint object to display the text
-            var textPaint = new SKPaint {
-                Color = TextColor.ToSKColor(),
-                Typeface = SKTypeface.FromFamilyName("Montserrat")
-            };
-
-            // Adjust TextSize property so text is 90% of screen width
-            float textWidth = textPaint.MeasureText(str);
-            textPaint.TextSize = textSize;
-
-            // Find the text bounds
-            SKRect textBounds = new SKRect();
             textPaint.MeasureText(str, ref textBounds);
 
-            // Calculate offsets to center the text on the screen
-            float xText = percentageWidth / 2 - textBounds.MidX;
+            var xText = percentageWidth / 2 - textBounds.MidX;
             if (xText < 0)
             {
                 xText = info.Width / 2 - textBounds.MidX;
                 textPaint.Color = AlternativeTextColor.ToSKColor();
             }
             
-            float yText = info.Height / 2 - textBounds.MidY;
+            var yText = info.Height / 2 - textBounds.MidY;
 
-            // And draw the text
             canvas.DrawText(str, xText, yText, textPaint);
         }
     }
