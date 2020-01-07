@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XamBooksApp.Views.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:XamBooksApp.Controls;assembly=XamBooksApp"
+    Title="{Binding Title}"
+    BackgroundColor="WhiteSmoke">
+
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+        <Label
+            FontFamily="{StaticResource BoldFont}"
+            FontSize="Large"
+            Text="Currently Reading" />
+
+        <Slider
+            Margin="20"
+            Maximum="1"
+            Minimum="0"
+            Value="{Binding Percentage}" />
+
+        <Grid Padding="15" ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Frame
+                Grid.ColumnSpan="2"
+                BackgroundColor="White"
+                CornerRadius="10"
+                HasShadow="False"
+                HorizontalOptions="FillAndExpand" />
+
+            <StackLayout
+                Grid.Column="1"
+                Margin="0"
+                Padding="0,10,15,10"
+                VerticalOptions="Center">
+                <Label
+                    FontFamily="{StaticResource BoldFont}"
+                    FontSize="18"
+                    Text="Luna: Wolf Moon" />
+                <Label
+                    FontFamily="{StaticResource NormalFont}"
+                    FontSize="16"
+                    Text="Ian McDonald" />
+
+                <controls:GradientProgressBar
+                    AlternativeTextColor="#0463E1"
+                    BarBackgroundColor="#bcd8f6"
+                    CornerRadius="6"
+                    FontSize="18"
+                    GradientEndColor="#a98af6"
+                    GradientStartColor="#398efe"
+                    HeightRequest="30"
+                    Percentage="{Binding Percentage}"
+                    TextColor="White" />
+            </StackLayout>
+
+            <Image
+                Margin="20,0"
+                Aspect="AspectFill"
+                HeightRequest="120"
+                HorizontalOptions="Start"
+                Source="https://upload.wikimedia.org/wikipedia/en/thumb/e/ec/Luna_Wolf_Moon-2016.png/220px-Luna_Wolf_Moon-2016.png"
+                TranslationY="-20"
+                VerticalOptions="End"
+                WidthRequest="80" />
+
+        </Grid>
+
+    </StackLayout>
+
+</ContentPage>
