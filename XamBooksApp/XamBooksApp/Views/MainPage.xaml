@@ -9,9 +9,17 @@
 
     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
+        <SearchBar
+            Margin="{x:OnPlatform iOS=2,
+                                  Android=10}"
+            BackgroundColor="White"
+            Placeholder="Search here..."
+            PlaceholderColor="LightGray"
+            TextColor="DarkGray" />
+
         <controls:StandardEntry Margin="10" Placeholder="Test" />
 
-        <CollectionView
+        <!--<CollectionView
             HeightRequest="100"
             HorizontalOptions="Fill"
             ItemsLayout="HorizontalList"
@@ -32,7 +40,7 @@
                     HeightRequest="50"
                     WidthRequest="50" />
             </CollectionView.Footer>
-        </CollectionView>
+        </CollectionView>-->
 
         <Label
             FontFamily="{StaticResource BoldFont}"
