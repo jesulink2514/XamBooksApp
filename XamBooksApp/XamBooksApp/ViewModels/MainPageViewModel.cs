@@ -10,17 +10,18 @@ namespace XamBooksApp.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        private float _percentage;
+        public float Percentage { get;set;}
 
-        public float Percentage
+        public List<string> Items { get; set; } = new List<string>
         {
-            get => _percentage;
-            set
-            {
-                _percentage = value;
-                RaisePropertyChanged();
-            }
-        }
+            "Item 1",
+            "Item 2",
+            "Item 3",
+            "Item 4",
+            "Item 5",
+            "Item 6"
+        };
+
         public MainPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {

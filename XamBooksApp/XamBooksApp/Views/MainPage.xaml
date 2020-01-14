@@ -7,7 +7,33 @@
     Title="{Binding Title}"
     BackgroundColor="WhiteSmoke">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+        <controls:StandardEntry Margin="10" Placeholder="Test" />
+
+        <CollectionView
+            HeightRequest="100"
+            HorizontalOptions="Fill"
+            ItemsLayout="HorizontalList"
+            ItemsSource="{Binding Items}"
+            VerticalOptions="Start">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="20" BackgroundColor="Blue">
+                        <Label Text="{Binding .}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.Footer>
+                <BoxView
+                    BackgroundColor="Red"
+                    HeightRequest="50"
+                    WidthRequest="50" />
+            </CollectionView.Footer>
+        </CollectionView>
+
         <Label
             FontFamily="{StaticResource BoldFont}"
             FontSize="Large"
