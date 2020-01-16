@@ -10,6 +10,7 @@ namespace XamBooksApp.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
+        public float Radius { get;set;}
         public float Percentage { get;set;}
 
         public List<string> Items { get; set; } = new List<string>

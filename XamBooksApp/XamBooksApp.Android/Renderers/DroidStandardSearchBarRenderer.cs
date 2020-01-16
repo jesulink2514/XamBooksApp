@@ -1,17 +1,18 @@
 ﻿using Android.Content;
 using Android.Graphics.Drawables;
+using Android.Views;
 using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using XamBooksApp.Droid.Renderers;
 using Color = Android.Graphics.Color;
 
-[assembly: ExportRenderer(typeof(SearchBar), typeof(DroidCleanSearchBarRenderer))]
+[assembly: ExportRenderer(typeof(SearchBar), typeof(DroidStandardSearchBarRenderer))]
 namespace XamBooksApp.Droid.Renderers
 {
-    public class DroidCleanSearchBarRenderer: SearchBarRenderer
+    public class DroidStandardSearchBarRenderer: SearchBarRenderer
     {
-        public DroidCleanSearchBarRenderer(Context context):base(context)
+        public DroidStandardSearchBarRenderer(Context context):base(context)
         {
         }
 
@@ -41,8 +42,19 @@ namespace XamBooksApp.Droid.Renderers
             gd.SetColor(color);
             gd.SetCornerRadius(30);
             gd.SetStroke(2, Color.LightGray);
+            
+            //control.SetBackground(gd);
 
-            control.SetBackground(gd);
+            var shadow = control.GenerateBackgroundWithShadow(
+                Color.White,
+                60f, 
+                Color.LightGray, 
+                10, 
+                GravityFlags.Center);
+
+            control.SetClipToPadding(false);
+
+            control.SetBackground(shadow);
         }
     }
 }

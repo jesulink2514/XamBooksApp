@@ -7,40 +7,37 @@
     Title="{Binding Title}"
     BackgroundColor="WhiteSmoke">
 
-    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+    <StackLayout
+        Padding="20"
+        HorizontalOptions="FillAndExpand"
+        Spacing="20"
+        VerticalOptions="FillAndExpand">
 
         <SearchBar
-            Margin="{x:OnPlatform iOS=2,
-                                  Android=10}"
+            Margin="{x:OnPlatform iOS=-8,
+                                  Android=0}"
             BackgroundColor="White"
             Placeholder="Search here..."
             PlaceholderColor="LightGray"
             TextColor="DarkGray" />
 
-        <controls:StandardEntry Margin="10" Placeholder="Test" />
+        <controls:StandardEntry
+            Padding="20"
+            BorderColor="Red"
+            BorderThickness="2"
+            CornerRadius="10"
+            Placeholder="Enter your name" />
 
-        <!--<CollectionView
-            HeightRequest="100"
-            HorizontalOptions="Fill"
-            ItemsLayout="HorizontalList"
-            ItemsSource="{Binding Items}"
-            VerticalOptions="Start">
+        <Slider
+            Margin="10"
+            Maximum="50"
+            Minimum="0"
+            Value="{Binding Radius}" />
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="20" BackgroundColor="Blue">
-                        <Label Text="{Binding .}" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-
-            <CollectionView.Footer>
-                <BoxView
-                    BackgroundColor="Red"
-                    HeightRequest="50"
-                    WidthRequest="50" />
-            </CollectionView.Footer>
-        </CollectionView>-->
+        <controls:StandardEntry
+            Padding="15"
+            BackgroundColor="#590058A5"
+            CornerRadius="{Binding Radius}" />
 
         <Label
             FontFamily="{StaticResource BoldFont}"
@@ -48,7 +45,7 @@
             Text="Currently Reading" />
 
         <Slider
-            Margin="20"
+            Margin="10"
             Maximum="1"
             Minimum="0"
             Value="{Binding Percentage}" />
@@ -63,7 +60,7 @@
                 Grid.ColumnSpan="2"
                 BackgroundColor="White"
                 CornerRadius="10"
-                HasShadow="False"
+                HasShadow="True"
                 HorizontalOptions="FillAndExpand" />
 
             <StackLayout
