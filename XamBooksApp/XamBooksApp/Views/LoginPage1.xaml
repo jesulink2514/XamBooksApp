@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XamBooksApp.Views.LoginPage1"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:XamBooksApp.Controls;assembly=XamBooksApp"
+    xmlns:prism="http://prismlibrary.com"
+    Title="LoginPage"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="#394BA7">
+    <Grid Padding="20" RowSpacing="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Image
+            Grid.RowSpan="4"
+            Margin="-21"
+            Aspect="AspectFill"
+            HorizontalOptions="FillAndExpand"
+            Source="loginhuacachina.jpg" />
+
+        <Image
+            Grid.Row="0"
+            Margin="70,70,70,100"
+            HeightRequest="100"
+            HorizontalOptions="Center"
+            Source="logo.png"
+            WidthRequest="100" />
+
+        <Label
+            Grid.Row="1"
+            FontAttributes="Bold"
+            FontSize="Medium"
+            Text="LOGIN"
+            TextColor="White" />
+
+        <controls:StandardEntry
+            Grid.Row="2"
+            Padding="13"
+            BackgroundColor="#31FFFFFF"
+            BorderColor="White"
+            BorderThickness="1"
+            CornerRadius="8"
+            Placeholder="Username"
+            PlaceholderColor="White" />
+
+        <controls:StandardEntry
+            Grid.Row="3"
+            Margin="0,0,0,20"
+            Padding="13"
+            BackgroundColor="#31FFFFFF"
+            BorderColor="White"
+            BorderThickness="1"
+            CornerRadius="8"
+            IsPassword="True"
+            Placeholder="Password"
+            PlaceholderColor="White" />
+
+        <Button
+            Grid.Row="4"
+            BackgroundColor="White"
+            CornerRadius="8"
+            Text="LOGIN"
+            TextColor="#4758AE"
+            TranslationY="-20" />
+
+        <Label
+            Grid.Row="5"
+            HorizontalOptions="Center"
+            TextColor="White"
+            VerticalOptions="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Don't have an account? " />
+                    <Span FontAttributes="Bold" Text="SIGNUP" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </Grid>
+</ContentPage>

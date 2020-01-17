@@ -23,13 +23,16 @@ namespace XamBooksApp
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavPage/MainPage");
+            //await NavigationService.NavigateAsync("NavPage/MainPage");
+            await NavigationService.NavigateAsync("LoginPage1");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<NavPage>();
+            containerRegistry.RegisterForNavigation<LoginPage1, LoginPage1ViewModel>();
+            containerRegistry.RegisterForNavigation<LoginPage2, LoginPage2ViewModel>();
         }
     }
 }
