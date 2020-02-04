@@ -8,3 +8,8 @@ I've built the **GradientProgressBar** by now using Skiasharp, that was fun so I
 https://somostechies.com/gradient-progressbar-para-xamarin-forms-usando-skiasharp/
 
 ![demo](https://somostechies.com/content/images/2020/01/scroll-demo.gif)
+
+### Would you like to see how animate the progress change? It's easy so check it out! 
+
+**https://github.com/jesulink2514/XamBooksApp/tree/feature/animate-progress**
+
