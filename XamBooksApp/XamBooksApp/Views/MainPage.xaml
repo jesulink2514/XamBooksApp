@@ -28,16 +28,7 @@
             CornerRadius="10"
             Placeholder="Enter your name" />
 
-        <Slider
-            Margin="10"
-            Maximum="50"
-            Minimum="0"
-            Value="{Binding Radius}" />
-
-        <controls:StandardEntry
-            Padding="15"
-            BackgroundColor="#590058A5"
-            CornerRadius="{Binding Radius}" />
+        <Button Text="Animate" Clicked="Button_Clicked"/>
 
         <Label
             FontFamily="{StaticResource BoldFont}"
@@ -78,6 +69,7 @@
                     Text="Ian McDonald" />
 
                 <controls:GradientProgressBar
+                    x:Name="ProgressBar"
                     AlternativeTextColor="#0463E1"
                     BarBackgroundColor="#bcd8f6"
                     CornerRadius="6"
