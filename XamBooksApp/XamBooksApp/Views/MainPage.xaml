@@ -3,96 +3,57 @@
     x:Class="XamBooksApp.Views.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:XamBooksApp.Controls;assembly=XamBooksApp"
+    xmlns:navigation="clr-namespace:XamBooksApp.Navigation;assembly=XamBooksApp"
+    xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
+    xmlns:views="clr-namespace:XamBooksApp.Views;assembly=XamBooksApp"
     Title="{Binding Title}"
+    Padding="0"
     BackgroundColor="WhiteSmoke">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="menu_vertical.png" />
+    </ContentPage.ToolbarItems>
+    <Grid VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="90" />
+        </Grid.RowDefinitions>
 
-    <StackLayout
-        Padding="20"
-        HorizontalOptions="FillAndExpand"
-        Spacing="20"
-        VerticalOptions="FillAndExpand">
+        <tabs:ViewSwitcher
+            x:Name="Switcher"
+            Grid.RowSpan="2"
+            SelectedIndex="{Binding SelectedViewModelIndex, Mode=TwoWay}">
+            <navigation:PrismLazyView x:TypeArguments="views:HomePage" />
+            <navigation:PrismLazyView x:TypeArguments="views:MyProfilePage" />
+            <navigation:PrismLazyView x:TypeArguments="views:MyBooksPage" />
+        </tabs:ViewSwitcher>
 
-        <SearchBar
-            Margin="{x:OnPlatform iOS=-8,
-                                  Android=0}"
+        <Frame
+            Grid.Row="1"
+            Margin="20"
+            Padding="0,15,0,0"
             BackgroundColor="White"
-            Placeholder="Search here..."
-            PlaceholderColor="LightGray"
-            TextColor="DarkGray" />
+            CornerRadius="30"
+            HasShadow="False"
+            HeightRequest="90"
+            VerticalOptions="Start">
+            <tabs:TabHostView
+                x:Name="TabHost"
+                SelectedIndex="{Binding Source={x:Reference Switcher}, Path=SelectedIndex, Mode=TwoWay}"
+                TabType="Fixed">
+                <tabs:TabHostView.Tabs>
 
-        <controls:StandardEntry
-            Padding="20"
-            BorderColor="Red"
-            BorderThickness="2"
-            CornerRadius="10"
-            Placeholder="Enter your name" />
+                    <tabs:BottomTabItem IconImageSource="home.png" />
 
-        <Button Text="Animate" Clicked="Button_Clicked"/>
+                    <tabs:BottomTabItem IconImageSource="book.png" />
 
-        <Label
-            FontFamily="{StaticResource BoldFont}"
-            FontSize="Large"
-            Text="Currently Reading" />
+                    <tabs:BottomTabItem IconImageSource="contacts.png" />
 
-        <Slider
-            Margin="10"
-            Maximum="1"
-            Minimum="0"
-            Value="{Binding Percentage}" />
+                </tabs:TabHostView.Tabs>
+            </tabs:TabHostView>
+        </Frame>
 
-        <Grid Padding="15" ColumnSpacing="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+    </Grid>
 
-            <Frame
-                Grid.ColumnSpan="2"
-                BackgroundColor="White"
-                CornerRadius="10"
-                HasShadow="True"
-                HorizontalOptions="FillAndExpand" />
 
-            <StackLayout
-                Grid.Column="1"
-                Margin="0"
-                Padding="0,10,15,10"
-                VerticalOptions="Center">
-                <Label
-                    FontFamily="{StaticResource BoldFont}"
-                    FontSize="18"
-                    Text="Luna: Wolf Moon" />
-                <Label
-                    FontFamily="{StaticResource NormalFont}"
-                    FontSize="16"
-                    Text="Ian McDonald" />
-
-                <controls:GradientProgressBar
-                    x:Name="ProgressBar"
-                    AlternativeTextColor="#0463E1"
-                    BarBackgroundColor="#bcd8f6"
-                    CornerRadius="6"
-                    FontSize="18"
-                    GradientEndColor="#a98af6"
-                    GradientStartColor="#398efe"
-                    HeightRequest="30"
-                    Percentage="{Binding Percentage}"
-                    TextColor="White" />
-            </StackLayout>
-
-            <Image
-                Margin="20,0"
-                Aspect="AspectFill"
-                HeightRequest="120"
-                HorizontalOptions="Start"
-                Source="https://upload.wikimedia.org/wikipedia/en/thumb/e/ec/Luna_Wolf_Moon-2016.png/220px-Luna_Wolf_Moon-2016.png"
-                TranslationY="-20"
-                VerticalOptions="End"
-                WidthRequest="80" />
-
-        </Grid>
-
-    </StackLayout>
 
 </ContentPage>

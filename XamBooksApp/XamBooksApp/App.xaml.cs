@@ -1,5 +1,7 @@
 ﻿using Prism;
 using Prism.Ioc;
+using Prism.Mvvm;
+using Prism.Navigation;
 using XamBooksApp.ViewModels;
 using XamBooksApp.Views;
 using Xamarin.Forms;
@@ -10,11 +12,6 @@ namespace XamBooksApp
 {
     public partial class App
     {
-        /* 
-         * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
-         * This imposes a limitation in which the App class must have a default constructor. 
-         * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
-         */
         public App() : this(null) { }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
@@ -24,7 +21,6 @@ namespace XamBooksApp
             InitializeComponent();
 
             await NavigationService.NavigateAsync("NavPage/MainPage");
-            //await NavigationService.NavigateAsync("LoginPage1");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -33,6 +29,12 @@ namespace XamBooksApp
             containerRegistry.RegisterForNavigation<NavPage>();
             containerRegistry.RegisterForNavigation<LoginPage1, LoginPage1ViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage2, LoginPage2ViewModel>();
+            containerRegistry.Register<HomePage>();
+            containerRegistry.Register<HomePageViewModel>();
+            containerRegistry.Register<MyProfilePage>();
+            containerRegistry.Register<MyProfilePageViewModel>();
+            containerRegistry.Register<MyBooksPage>();
+            containerRegistry.Register<MyBooksPageViewModel>();
         }
     }
 }

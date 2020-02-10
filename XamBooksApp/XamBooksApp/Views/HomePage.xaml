@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="XamBooksApp.Views.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:XamBooksApp.Controls;assembly=XamBooksApp"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="WhiteSmoke">
+    <ScrollView>
+        <StackLayout
+            Padding="20"
+            HorizontalOptions="FillAndExpand"
+            Spacing="20"
+            VerticalOptions="FillAndExpand">
+
+            <SearchBar
+                Margin="{x:OnPlatform iOS=-8,
+                                      Android=0}"
+                BackgroundColor="White"
+                Placeholder="Search here..."
+                PlaceholderColor="LightGray"
+                TextColor="DarkGray" />
+
+            <StackLayout CompressedLayout.IsHeadless="True" Orientation="Horizontal">
+                <Label
+                    FontFamily="{StaticResource BoldFont}"
+                    FontSize="Large"
+                    Text="Top Authors" />
+            </StackLayout>
+
+            <Frame CornerRadius="10" HasShadow="False">
+                <StackLayout>
+                    <Image Source="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTrvgNlafcbYAJaYIXMT4sQC-1KvpXP9XDrYQpgh5wLIjxAG2A8" />
+                    <Label Text="Jeff VandeMeer" />
+                    <Label Text="56,240 Followers" />
+                    <controls:GradientLabel
+                        AlternativeTextColor="#0463E1"
+                        BarBackgroundColor="#bcd8f6"
+                        CornerRadius="18"
+                        FontSize="15"
+                        GradientEndColor="#a98af6"
+                        GradientStartColor="#398efe"
+                        HeightRequest="25"
+                        HorizontalOptions="Center"
+                        Text="Following"
+                        TextColor="White"
+                        WidthRequest="100" />
+                </StackLayout>
+            </Frame>
+
+            <StackLayout CompressedLayout.IsHeadless="True" Orientation="Horizontal">
+                <Label
+                    FontFamily="{StaticResource BoldFont}"
+                    FontSize="Large"
+                    Text="Latest Books" />
+            </StackLayout>
+
+            <Grid Padding="15" ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Frame
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="White"
+                    CornerRadius="10"
+                    HasShadow="True"
+                    HorizontalOptions="FillAndExpand" />
+
+                <StackLayout
+                    Grid.Column="1"
+                    Margin="0"
+                    Padding="0,10,15,10"
+                    VerticalOptions="Center">
+                    <Label
+                        FontFamily="{StaticResource BoldFont}"
+                        FontSize="18"
+                        Text="Luna: Wolf Moon" />
+                    <Label
+                        FontFamily="{StaticResource NormalFont}"
+                        FontSize="16"
+                        Text="Ian McDonald" />
+
+                    <Label
+                        FontSize="13"
+                        LineBreakMode="CharacterWrap"
+                        MaxLines="2"
+                        Text="Recovering from his near-fatal Moon-run escape through vacuum, Lucas Corta has only one source of potential allies to reclaim his empire: Earth. But as those who have lived on the Moon for an extended period are physically incapable of surviving on Eart" />
+                </StackLayout>
+
+
+                <Image
+                    Margin="20,0"
+                    Aspect="AspectFill"
+                    HeightRequest="120"
+                    HorizontalOptions="Start"
+                    Source="https://upload.wikimedia.org/wikipedia/en/thumb/e/ec/Luna_Wolf_Moon-2016.png/220px-Luna_Wolf_Moon-2016.png"
+                    TranslationY="-20"
+                    VerticalOptions="End"
+                    WidthRequest="80" />
+
+                <controls:GradientLabel
+                    Margin="0"
+                    CornerRadius="8"
+                    FontSize="14"
+                    GradientEndColor="#a98af6"
+                    GradientStartColor="#398efe"
+                    HeightRequest="20"
+                    HorizontalOptions="Center"
+                    Text="63%"
+                    TextColor="White"
+                    TranslationY="-10"
+                    VerticalOptions="End"
+                    WidthRequest="50" />
+
+
+
+            </Grid>
+
+
+        </StackLayout>
+    </ScrollView>
+</ContentView>
