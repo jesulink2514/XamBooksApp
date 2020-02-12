@@ -180,8 +180,6 @@ namespace XamBooksApp.Controls
 
         protected override void OnTouch(SKTouchEventArgs e)
         {
-            if (!IsEnabled) return;
-
             if (e.ActionType == SKTouchAction.Pressed|| 
                 e.ActionType == SKTouchAction.Released || 
                 e.ActionType == SKTouchAction.Moved)
