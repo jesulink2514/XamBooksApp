@@ -9,6 +9,11 @@ namespace XamBooksApp.Controls
 {
     public class GradientProgressBar: SKCanvasView
     {
+        public GradientProgressBar()
+        {
+            EnableTouchEvents = true;
+        }
+
         public static BindableProperty PercentageProperty = BindableProperty.Create(nameof(Percentage), typeof(float),
             typeof(GradientProgressBar), 0f, BindingMode.OneWay,
             validateValue: (_, value) => value != null,
@@ -17,7 +22,11 @@ namespace XamBooksApp.Controls
         public float Percentage
         {
             get => (float)GetValue(PercentageProperty);
-            set => SetValue(PercentageProperty, value);
+            set
+            {
+                if(Percentage != value)
+                    SetValue(PercentageProperty, value);
+            }
         }
 
         public static BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(Percentage), typeof(float),
@@ -100,6 +109,7 @@ namespace XamBooksApp.Controls
                 control.InvalidateSurface();
         }
 
+        protected float ScaleFactor;
         protected override void OnPaintSurface(SKPaintSurfaceEventArgs e)
         {
             var info = e.Info;
@@ -107,6 +117,7 @@ namespace XamBooksApp.Controls
 
             float width = (float)Width;
             var scale = CanvasSize.Width / width;
+            ScaleFactor = scale;
 
             var percentage = Percentage;
 
@@ -165,6 +176,25 @@ namespace XamBooksApp.Controls
             var yText = info.Height / 2 - textBounds.MidY;
 
             canvas.DrawText(str, xText, yText, textPaint);
+        }
+
+        protected override void OnTouch(SKTouchEventArgs e)
+        {
+            if (!IsEnabled) return;
+
+            if (e.ActionType == SKTouchAction.Pressed|| 
+                e.ActionType == SKTouchAction.Released || 
+                e.ActionType == SKTouchAction.Moved)
+            {
+                var actualWidth = ScaleFactor * Width;
+                var x = (float)Math.Min(actualWidth, e.Location.X);
+
+                var percentage = (float)Math.Max(0,x / actualWidth);
+
+                Percentage = percentage;
+            }
+
+            e.Handled = true;
         }
     }
 }

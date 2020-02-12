@@ -28,7 +28,7 @@
             CornerRadius="10"
             Placeholder="Enter your name" />
 
-        <Button Text="Animate" Clicked="Button_Clicked"/>
+        <Button Clicked="Button_Clicked" Text="Animate" />
 
         <Label
             FontFamily="{StaticResource BoldFont}"
@@ -77,7 +77,7 @@
                     GradientEndColor="#a98af6"
                     GradientStartColor="#398efe"
                     HeightRequest="30"
-                    Percentage="{Binding Percentage}"
+                    Percentage="{Binding Percentage, Mode=TwoWay}"
                     TextColor="White" />
             </StackLayout>
 
