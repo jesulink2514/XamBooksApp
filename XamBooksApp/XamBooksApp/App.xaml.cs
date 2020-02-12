@@ -2,6 +2,7 @@
 using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Sharpnado.Presentation.Forms.RenderedViews;
 using XamBooksApp.ViewModels;
 using XamBooksApp.Views;
 using Xamarin.Forms;
@@ -14,7 +15,9 @@ namespace XamBooksApp
     {
         public App() : this(null) { }
 
-        public App(IPlatformInitializer initializer) : base(initializer) { }
+        public App(IPlatformInitializer initializer) : base(initializer)
+        {
+        }
 
         protected override async void OnInitialized()
         {

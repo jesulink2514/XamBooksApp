@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Prism.Navigation;
+using XamBooksApp.Models;
 
 namespace XamBooksApp.ViewModels
 {
@@ -12,20 +13,20 @@ namespace XamBooksApp.ViewModels
         public float Radius { get; set; }
         public float Percentage { get; set; }
 
-        public List<string> Items { get; set; } = new List<string>
-        {
-            "Item 1",
-            "Item 2",
-            "Item 3",
-            "Item 4",
-            "Item 5",
-            "Item 6"
-        };
+        public List<AuthorViewModel> TopAuthors { get; set; } = SampleAuthors.All
+            .ToList();
+
+        public List<Book> LatestBooks { get; set; } = Books.All.ToList();
 
         public HomePageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
             Title = "Main Page";
         }
+    }
+
+    public class AuthorViewModel : Author
+    {
+        public bool Following { get; set; }
     }
 }

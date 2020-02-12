@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Windows.Input;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 
 namespace XamBooksApp.Controls
 {
-    public class GradientLabel : SKCanvasView
+    public class GradientButton : SKCanvasView
     {
+        public GradientButton()
+        {
+            EnableTouchEvents = true;
+        }
         public static BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(float),
-            typeof(GradientLabel), 5f, BindingMode.OneWay,
+            typeof(GradientToogleButton), 5f, BindingMode.OneWay,
             validateValue: (_, value) => value != null && (float)value >= 0,
             propertyChanged: OnPropertyChangedInvalidate);
 
@@ -20,7 +25,7 @@ namespace XamBooksApp.Controls
 
 
         public static BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(float),
-            typeof(GradientLabel), 12f, BindingMode.OneWay,
+            typeof(GradientToogleButton), 12f, BindingMode.OneWay,
             validateValue: (_, value) => value != null && (float)value >= 0,
             propertyChanged: OnPropertyChangedInvalidate);
 
@@ -31,7 +36,7 @@ namespace XamBooksApp.Controls
         }
 
         public static BindableProperty GradientStartColorProperty = BindableProperty.Create(nameof(GradientStartColor), typeof(Color),
-            typeof(GradientLabel), Color.Purple, BindingMode.OneWay,
+            typeof(GradientToogleButton), Color.Purple, BindingMode.OneWay,
             validateValue: (_, value) => value != null, propertyChanged: OnPropertyChangedInvalidate);
 
         public Color GradientStartColor
@@ -41,7 +46,7 @@ namespace XamBooksApp.Controls
         }
 
         public static BindableProperty GradientEndColorProperty = BindableProperty.Create(nameof(GradientEndColor), typeof(Color),
-            typeof(GradientLabel), Color.Blue, BindingMode.OneWay,
+            typeof(GradientToogleButton), Color.Blue, BindingMode.OneWay,
             validateValue: (_, value) => value != null, propertyChanged: OnPropertyChangedInvalidate);
 
         public Color GradientEndColor
@@ -51,7 +56,7 @@ namespace XamBooksApp.Controls
         }
 
         public static BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color),
-            typeof(GradientLabel), Color.Blue, BindingMode.OneWay,
+            typeof(GradientToogleButton), Color.Blue, BindingMode.OneWay,
             validateValue: (_, value) => value != null, propertyChanged: OnPropertyChangedInvalidate);
 
         public Color TextColor
@@ -60,8 +65,26 @@ namespace XamBooksApp.Controls
             set => SetValue(TextColorProperty, value);
         }
 
+        public static BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand),
+            typeof(GradientToogleButton), null, BindingMode.OneWay);
+
+        public ICommand Command
+        {
+            get => (ICommand)GetValue(CommandProperty);
+            set => SetValue(CommandProperty, value);
+        }
+
+        public static BindableProperty CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object),
+            typeof(GradientToogleButton), null, BindingMode.OneWay);
+
+        public object CommandParameter
+        {
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
+        }
+
         public static BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string),
-            typeof(GradientLabel), string.Empty, BindingMode.OneWay, propertyChanged: OnPropertyChangedInvalidate);
+            typeof(GradientToogleButton), string.Empty, BindingMode.OneWay, propertyChanged: OnPropertyChangedInvalidate);
 
         public string Text
         {
@@ -71,7 +94,7 @@ namespace XamBooksApp.Controls
 
         private static void OnPropertyChangedInvalidate(BindableObject bindable, object oldvalue, object newvalue)
         {
-            var control = (GradientLabel)bindable;
+            var control = (GradientToogleButton)bindable;
 
             if (oldvalue != newvalue)
                 control.InvalidateSurface();
@@ -96,10 +119,18 @@ namespace XamBooksApp.Controls
 
             canvas.Clear();
 
-            var controlRect = new SKRect(0, 0, info.Width, height);
+            var strokeWidth = 10;
+
+            var controlRect = new SKRect(strokeWidth, strokeWidth, info.Width - strokeWidth, height - strokeWidth);
+
             var backgroundBar = new SKRoundRect(controlRect, cornerRadius, cornerRadius);
 
-            using (var paint = new SKPaint() { IsAntialias = true })
+            using (var paint = new SKPaint()
+            {
+                IsAntialias = true,
+                Color = Color.White.ToSKColor(),
+                Style = SKPaintStyle.StrokeAndFill
+            })
             {
                 float y = info.Height;
 
@@ -119,7 +150,7 @@ namespace XamBooksApp.Controls
 
             var textPaint = new SKPaint
             {
-                Color = TextColor.ToSKColor(), 
+                Color = TextColor.ToSKColor(),
                 TextSize = textSize
             };
 
@@ -127,11 +158,36 @@ namespace XamBooksApp.Controls
 
             textPaint.MeasureText(str, ref textBounds);
 
-            var xText = CanvasSize.Width/ 2 - textBounds.MidX;
-            
+            var xText = CanvasSize.Width / 2 - textBounds.MidX;
+
             var yText = info.Height / 2 - textBounds.MidY;
 
             canvas.DrawText(str, xText, yText, textPaint);
         }
+
+        protected override void OnTouch(SKTouchEventArgs e)
+        {
+            switch (e.ActionType)
+            {
+                case SKTouchAction.Released:
+                    InvalidateSurface();
+                    if (Command != null && Command.CanExecute(CommandParameter))
+                    {
+                        Command.Execute(CommandParameter);
+                    }
+
+                    RaiseClickedEvent();
+                    break;
+            }
+
+            e.Handled = true;
+        }
+
+        protected void RaiseClickedEvent()
+        {
+            Clicked?.Invoke(this, new TappedEventArgs(CommandParameter));
+        }
+
+        public event EventHandler<TappedEventArgs> Clicked;
     }
 }

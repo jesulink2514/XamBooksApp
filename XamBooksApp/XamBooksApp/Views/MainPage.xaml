@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:navigation="clr-namespace:XamBooksApp.Navigation;assembly=XamBooksApp"
+    xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
     xmlns:views="clr-namespace:XamBooksApp.Views;assembly=XamBooksApp"
     Title="{Binding Title}"
@@ -15,7 +16,7 @@
     <Grid VerticalOptions="FillAndExpand">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="90" />
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
 
         <tabs:ViewSwitcher
@@ -27,15 +28,13 @@
             <navigation:PrismLazyView x:TypeArguments="views:MyBooksPage" />
         </tabs:ViewSwitcher>
 
-        <Frame
+
+        <pancakeView:PancakeView
             Grid.Row="1"
-            Margin="20"
+            Margin="10,0"
             Padding="0,15,0,0"
-            BackgroundColor="White"
-            CornerRadius="30"
-            HasShadow="False"
-            HeightRequest="90"
-            VerticalOptions="Start">
+            BackgroundColor="#E3FFFFFF"
+            CornerRadius="15,14,0,0">
             <tabs:TabHostView
                 x:Name="TabHost"
                 SelectedIndex="{Binding Source={x:Reference Switcher}, Path=SelectedIndex, Mode=TwoWay}"
@@ -50,7 +49,7 @@
 
                 </tabs:TabHostView.Tabs>
             </tabs:TabHostView>
-        </Frame>
+        </pancakeView:PancakeView>
 
     </Grid>
 

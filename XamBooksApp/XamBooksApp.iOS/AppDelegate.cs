@@ -1,7 +1,11 @@
-﻿using Foundation;
+﻿using FFImageLoading.Forms.Platform;
+using Foundation;
 using Prism;
 using Prism.Ioc;
+using Sharpnado.Presentation.Forms.iOS.Helpers;
+using Sharpnado.Presentation.Forms.RenderedViews;
 using UIKit;
+using Xamarin.Forms;
 
 
 namespace XamBooksApp.iOS
@@ -21,7 +25,9 @@ namespace XamBooksApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            CachedImageRenderer.Init();
             global::Xamarin.Forms.Forms.Init();
+            PlatformHelper.InitializeSingleton(new iOSPlatformHelper());
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);
