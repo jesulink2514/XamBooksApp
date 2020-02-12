@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="XamBooksApp.Views.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:XamBooksApp.Controls;assembly=XamBooksApp"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:models="clr-namespace:XamBooksApp.Models;assembly=XamBooksApp"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
+    xmlns:skiaRate="clr-namespace:SkiaRate;assembly=SkiaRate.Forms"
+    xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="WhiteSmoke">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="#08142a" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <StackLayout
+        Padding="20"
+        HorizontalOptions="FillAndExpand"
+        Spacing="20"
+        VerticalOptions="FillAndExpand">
+
+        <SearchBar
+            Margin="{x:OnPlatform iOS=-8,
+                                  Android=0}"
+            BackgroundColor="White"
+            Placeholder="Search books, authors, publishers..."
+            PlaceholderColor="LightGray"
+            TextColor="DarkGray" />
+
+        <StackLayout CompressedLayout.IsHeadless="True" Orientation="Horizontal">
+            <Label
+                FontFamily="{StaticResource BoldFont}"
+                FontSize="Large"
+                Text="Top Authors" />
+        </StackLayout>
+
+        <renderedViews:HorizontalListView
+            CollectionPadding="8,8"
+            ItemHeight="220"
+            ItemSpacing="20"
+            ItemWidth="144"
+            ItemsSource="{Binding TopAuthors}"
+            SnapStyle="Center">
+            <renderedViews:HorizontalListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame
+                            Padding="15"
+                            CornerRadius="10"
+                            HasShadow="False"
+                            HorizontalOptions="Start">
+                            <StackLayout>
+                                <forms:CachedImage
+                                    DownsampleToViewSize="True"
+                                    HeightRequest="70"
+                                    Source="{Binding ProfilePictureUrl}"
+                                    WidthRequest="70">
+                                    <forms:CachedImage.Transformations>
+                                        <transformations:CircleTransformation />
+                                    </forms:CachedImage.Transformations>
+                                </forms:CachedImage>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="15"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Name}" />
+                                <Label HorizontalOptions="Center" Text="56,240 Followers" />
+                                <controls:GradientToogleButton
+                                    Margin="0,25,0,0"
+                                    AlternativeTextColor="#0463E1"
+                                    BarBackgroundColor="#bcd8f6"
+                                    CornerRadius="18"
+                                    FontSize="15"
+                                    GradientEndColor="#a98af6"
+                                    GradientStartColor="#398efe"
+                                    HeightRequest="32"
+                                    HorizontalOptions="Center"
+                                    IsSelected="{Binding Following}"
+                                    SelectedText="Following"
+                                    TextColor="White"
+                                    UnselectedText="Follow"
+                                    WidthRequest="100" />
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+
+                </DataTemplate>
+            </renderedViews:HorizontalListView.ItemTemplate>
+        </renderedViews:HorizontalListView>
+
+        <StackLayout CompressedLayout.IsHeadless="True" Orientation="Horizontal">
+            <Label
+                FontFamily="{StaticResource BoldFont}"
+                FontSize="Large"
+                Text="Latest Books" />
+        </StackLayout>
+
+        <ListView
+            Margin="0,0,0,40"
+            BackgroundColor="Transparent"
+            HasUnevenRows="True"
+            ItemsSource="{Binding LatestBooks}"
+            SeparatorVisibility="None"
+            VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Book">
+                    <ViewCell>
+                        <Grid Padding="15" ColumnSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Frame
+                                Grid.ColumnSpan="2"
+                                BackgroundColor="White"
+                                CornerRadius="10"
+                                HasShadow="True"
+                                HorizontalOptions="FillAndExpand" />
+
+                            <StackLayout
+                                Grid.Column="1"
+                                Margin="0"
+                                Padding="0,10,15,10"
+                                VerticalOptions="Center">
+                                <Label
+                                    FontFamily="{StaticResource BoldFont}"
+                                    FontSize="17"
+                                    MaxLines="1"
+                                    Text="{Binding Title}" />
+                                <Label
+                                    FontFamily="{StaticResource NormalFont}"
+                                    FontSize="16"
+                                    Text="{Binding AuthorName}" />
+
+                                <Label
+                                    FontSize="13"
+                                    LineBreakMode="CharacterWrap"
+                                    MaxLines="2"
+                                    Text="{Binding Abstract}" />
+
+                                <StackLayout
+                                    CompressedLayout.IsHeadless="True"
+                                    HorizontalOptions="FillAndExpand"
+                                    Orientation="Horizontal">
+                                    <skiaRate:RatingView
+                                        ColorOn="#ffda01"
+                                        Count="5"
+                                        HeightRequest="15"
+                                        IsEnabled="False"
+                                        RatingType="Floating"
+                                        WidthRequest="80"
+                                        Value="3.47" />
+                                    <Label Text="3.47" VerticalOptions="Center" />
+                                    <Image
+                                        HeightRequest="15"
+                                        Source="comments.png"
+                                        VerticalOptions="Center" />
+                                    <Label Text="384" VerticalOptions="Center" />
+                                </StackLayout>
+
+                            </StackLayout>
+
+
+                            <Image
+                                Margin="20,0"
+                                Aspect="Fill"
+                                HeightRequest="120"
+                                HorizontalOptions="Start"
+                                Source="{Binding CoverUrl}"
+                                TranslationY="-30"
+                                VerticalOptions="End"
+                                WidthRequest="80" />
+
+                            <controls:GradientLabel
+                                Margin="0"
+                                CornerRadius="8"
+                                FontSize="14"
+                                GradientEndColor="#a98af6"
+                                GradientStartColor="#398efe"
+                                HeightRequest="20"
+                                HorizontalOptions="Center"
+                                Text="63%"
+                                TextColor="White"
+                                TranslationY="-20"
+                                VerticalOptions="End"
+                                WidthRequest="50" />
+
+
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+
+</ContentView>

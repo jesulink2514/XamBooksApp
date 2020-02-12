@@ -3,6 +3,8 @@ using Android.Content.PM;
 using Android.OS;
 using Prism;
 using Prism.Ioc;
+using Sharpnado.Presentation.Forms.Droid.Helpers;
+using Sharpnado.Presentation.Forms.RenderedViews;
 
 namespace XamBooksApp.Droid
 {
@@ -15,6 +17,8 @@ namespace XamBooksApp.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
+            PlatformHelper.InitializeSingleton(new AndroidPlatformHelper());
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer:true);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
