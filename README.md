@@ -10,6 +10,10 @@ I'm writing this app for book readers, in order to get track reading progress on
 
 **https://github.com/jesulink2514/XamBooksApp/tree/feature/feat-entry**
 
+### Demo Updated
+Video and post coming soon!
+![](https://github.com/jesulink2514/XamBooksApp/blob/master/BooksUI.gif?raw=true)
+
 ### This is a Work In Progress, right now...
 
 I've built the **GradientProgressBar** by now using Skiasharp, that was fun so I'm sharing this blog post about the process and simple math calcs about it.
