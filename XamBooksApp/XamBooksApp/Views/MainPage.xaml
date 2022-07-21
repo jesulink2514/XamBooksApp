@@ -27,8 +27,7 @@
             <navigation:PrismLazyView x:TypeArguments="views:MyProfilePage" />
             <navigation:PrismLazyView x:TypeArguments="views:MyBooksPage" />
         </tabs:ViewSwitcher>
-
-
+        
         <pancakeView:PancakeView
             Grid.Row="1"
             Margin="10,0"
@@ -50,9 +49,5 @@
                 </tabs:TabHostView.Tabs>
             </tabs:TabHostView>
         </pancakeView:PancakeView>
-
     </Grid>
-
-
-
 </ContentPage>
