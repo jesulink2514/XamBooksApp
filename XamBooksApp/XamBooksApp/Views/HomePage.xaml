@@ -27,8 +27,7 @@
         VerticalOptions="FillAndExpand">
 
         <SearchBar
-            Margin="{x:OnPlatform iOS=-8,
-                                  Android=0}"
+            Margin="{x:OnPlatform iOS=-8,Android=0}"
             BackgroundColor="White"
             Placeholder="Search books, authors, publishers..."
             PlaceholderColor="LightGray"
@@ -192,15 +191,10 @@
                                 TranslationY="-20"
                                 VerticalOptions="End"
                                 WidthRequest="50" />
-
-
-
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
     </StackLayout>
-
 </ContentView>

@@ -18,7 +18,6 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-
         <tabs:ViewSwitcher
             x:Name="Switcher"
             Grid.RowSpan="2"
@@ -27,7 +26,6 @@
             <navigation:PrismLazyView x:TypeArguments="views:MyProfilePage" />
             <navigation:PrismLazyView x:TypeArguments="views:MyBooksPage" />
         </tabs:ViewSwitcher>
-        
         <pancakeView:PancakeView
             Grid.Row="1"
             Margin="10,0"
@@ -39,13 +37,9 @@
                 SelectedIndex="{Binding Source={x:Reference Switcher}, Path=SelectedIndex, Mode=TwoWay}"
                 TabType="Fixed">
                 <tabs:TabHostView.Tabs>
-
                     <tabs:BottomTabItem IconImageSource="home.png" />
-
                     <tabs:BottomTabItem IconImageSource="book.png" />
-
                     <tabs:BottomTabItem IconImageSource="contacts.png" />
-
                 </tabs:TabHostView.Tabs>
             </tabs:TabHostView>
         </pancakeView:PancakeView>
