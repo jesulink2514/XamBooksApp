@@ -56,7 +56,6 @@
                 TranslationY="-20"
                 VerticalOptions="End"
                 WidthRequest="80" />
-
         </Grid>
 
         <Grid Padding="15" ColumnSpacing="0">
